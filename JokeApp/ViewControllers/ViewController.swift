@@ -10,7 +10,6 @@ import UIKit
 final class ViewController: UIViewController {
         
     @IBOutlet var jokeLabel: UILabel!
-    
     private let networkManager = NetworkManager.shared
     private var settingsParam: [String : Bool] = [:]
 
@@ -35,12 +34,14 @@ final class ViewController: UIViewController {
     
     @IBAction func unwind(for segue: UIStoryboardSegue) {
         let settingsVC = segue.source as? SettingsViewController
-        settingsParam["nsfw"] = settingsVC?.nsfw.isOn
-        settingsParam["religious"] = settingsVC?.religious.isOn
-        settingsParam["political"] = settingsVC?.political.isOn
-        settingsParam["racist"] = settingsVC?.racist.isOn
-        settingsParam["sexist"] = settingsVC?.sexist.isOn
-        settingsParam["explicit"] = settingsVC?.explicit.isOn
+        Settings.updateSettings(
+            nsfw: settingsVC?.nsfw.isOn ?? true,
+            religious: settingsVC?.religious.isOn ?? true,
+            political: settingsVC?.political.isOn ?? true,
+            racist: settingsVC?.racist.isOn ?? true,
+            sexist: settingsVC?.sexist.isOn ?? true,
+            explicit: settingsVC?.explicit.isOn ?? true
+        )
     }
 
     private func showAlert(with title: String, and message: String) {
@@ -53,15 +54,6 @@ final class ViewController: UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
-    
-    private func setupSettings() {
-        settingsParam["nsfw"] = true
-        settingsParam["religious"] = true
-        settingsParam["political"] = true
-        settingsParam["racist"] = true
-        settingsParam["sexist"] = true
-        settingsParam["explicit"] = true
-    }
 }
 
 // MARK: - Networking
@@ -72,27 +64,29 @@ extension ViewController {
             switch result {
             case .success(let joke):
                 
-                if self.settingsParam["nsfw"] == false && joke.flags.nsfw {
+                let settings = Settings.currentSettings
+                
+                if !settings.nsfw && joke.flags.nsfw {
                     return self.fetchJoke()
                 }
                 
-                if self.settingsParam["explicit"] == false && joke.flags.explicit {
+                if !settings.explicit && joke.flags.explicit {
                     return self.fetchJoke()
                 }
                 
-                if self.settingsParam["political"] == false && joke.flags.political {
+                if !settings.political && joke.flags.political {
                     return self.fetchJoke()
                 }
                 
-                if self.settingsParam["racist"] == false && joke.flags.racist {
+                if !settings.racist && joke.flags.racist {
                     return self.fetchJoke()
                 }
                 
-                if self.settingsParam["religious"] == false && joke.flags.religious {
+                if !settings.religious && joke.flags.religious {
                     return self.fetchJoke()
                 }
                 
-                if self.settingsParam["sexist"] == false && joke.flags.sexist {
+                if !settings.sexist && joke.flags.sexist {
                     return self.fetchJoke()
                 }
             

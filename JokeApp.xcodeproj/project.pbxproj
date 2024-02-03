@@ -16,6 +16,8 @@
 		6A95D2912B6969D400F24AC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A95D28F2B6969D400F24AC3 /* LaunchScreen.storyboard */; };
 		6A95D29D2B696B0400F24AC3 /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95D29C2B696B0400F24AC3 /* Joke.swift */; };
 		6ADD011A2B6EA99300430E30 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADD01192B6EA99300430E30 /* SettingsViewController.swift */; };
+		6ADD01242B6EE60800430E30 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADD01232B6EE60800430E30 /* DataStore.swift */; };
+		6ADD01262B6EE64F00430E30 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADD01252B6EE64F00430E30 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		6A95D2922B6969D400F24AC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A95D29C2B696B0400F24AC3 /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
 		6ADD01192B6EA99300430E30 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6ADD01232B6EE60800430E30 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		6ADD01252B6EE64F00430E30 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				6A6BE4D72B6E942D0095D9EB /* NetworkManager.swift */,
+				6ADD01232B6EE60800430E30 /* DataStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -112,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				6A95D29C2B696B0400F24AC3 /* Joke.swift */,
+				6ADD01252B6EE64F00430E30 /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -187,7 +193,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ADD01242B6EE60800430E30 /* DataStore.swift in Sources */,
 				6A95D2892B6969D200F24AC3 /* ViewController.swift in Sources */,
+				6ADD01262B6EE64F00430E30 /* Settings.swift in Sources */,
 				6A95D2852B6969D200F24AC3 /* AppDelegate.swift in Sources */,
 				6A6BE4D82B6E942D0095D9EB /* NetworkManager.swift in Sources */,
 				6A95D29D2B696B0400F24AC3 /* Joke.swift in Sources */,

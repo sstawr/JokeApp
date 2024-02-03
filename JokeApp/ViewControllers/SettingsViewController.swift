@@ -16,21 +16,16 @@ final class SettingsViewController: UIViewController {
     @IBOutlet var sexist: UISwitch!
     @IBOutlet var explicit: UISwitch!
     
-    var nswfValue: Bool!
-    var religiousValue: Bool!
-    var politicalValue: Bool!
-    var racistValue: Bool!
-    var sexistValue: Bool!
-    var explicitValue: Bool!
+    private let settings = Settings.currentSettings
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        nsfw.isOn = nswfValue
-        religious.isOn = religiousValue
-        political.isOn = politicalValue
-        racist.isOn = racistValue
-        sexist.isOn = sexistValue
-        explicit.isOn = explicitValue
+        nsfw.isOn = settings.nsfw
+        religious.isOn = settings.religious
+        political.isOn = settings.political
+        racist.isOn = settings.racist
+        sexist.isOn = settings.sexist
+        explicit.isOn = settings.explicit
     }
     
     @IBAction func cancelButton() {
