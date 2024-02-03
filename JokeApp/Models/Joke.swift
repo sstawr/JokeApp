@@ -14,13 +14,13 @@ struct Joke: Decodable {
     let flags: Flags
     let safe: Bool
     let lang: String
-    
-    struct Flags: Decodable {
-        let nsfw: Bool
-        let religious: Bool
-        let political: Bool
-        let racist: Bool
-        let sexist: Bool
-        let explicit: Bool
-    }
+}
+
+struct Flags: Decodable {
+    let nsfw: Bool
+    let religious: Bool
+    let political: Bool
+    let racist: Bool
+    let sexist: Bool
+    let explicit: Bool
 }
