@@ -7,40 +7,24 @@
 
 import UIKit
 
-enum Alert {
-    case success
-    case failed
-    
-    var title: String {
-        switch self {
-        case .success:
-            return "Success"
-        case .failed:
-            return "Failed"
-        }
-    }
-    
-    var message: String {
-        switch self {
-        case .success:
-            return "You can see the results in the Debug area"
-        case .failed:
-            return "You can see error in the Debug area"
-        }
-    }
-}
-
 final class ViewController: UIViewController {
     
-    private let link = URL(string: "https://v2.jokeapi.dev/joke/Any?safe-mode")!
+    
+    @IBOutlet var jokeLabel: UILabel!
+    
+    private let networkManager = NetworkManager.shared
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchJoke();
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//    }
+    
+    
+    @IBAction func getJoke() {
+        fetchJoke()
     }
     
-    private func showAlert(withStatus status: Alert) {
-        let alert = UIAlertController(title: status.title, message: status.message, preferredStyle: .alert)
+    private func showAlert(with title: String, and message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
@@ -50,26 +34,15 @@ final class ViewController: UIViewController {
 // MARK: - Networking
 extension ViewController {
     private func fetchJoke() {
-        URLSession.shared.dataTask(with: link) { [weak self] data, _, error in
-            guard let self else { return }
-            guard let data else {
-                print(error?.localizedDescription ?? "No error description")
-                return
+        let url = URL(string: "https://v2.jokeapi.dev/joke/Any")!
+        networkManager.fetchJoke(from: url) { result in
+            switch result {
+            case .success(let joke):
+                self.jokeLabel.text = "\(joke.joke ?? "")\(joke.setup ?? "") \n\n\(joke.delivery ?? "")"
+            case .failure(let error):
+                print(error)
+                self.showAlert(with: "Failed", and: "You can see error in the Debug area")
             }
-            
-            do {
-                let joke = try JSONDecoder().decode(Joke.self, from: data)
-                print(joke)
-                DispatchQueue.main.async {
-                    self.showAlert(withStatus: .success)
-                }
-            } catch {
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    self.showAlert(withStatus: .failed)
-                }
-            }
-            
-        }.resume()
+        }
     }
 }
