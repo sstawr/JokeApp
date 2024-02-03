@@ -14,6 +14,17 @@ struct Joke: Decodable {
     let flags: Flags
     let safe: Bool
     let lang: String
+    
+    var getFlags: [String: Bool] {
+        [
+            "nsfw": flags.nsfw,
+            "religious": flags.religious,
+            "political": flags.political,
+            "racist": flags.racist,
+            "sexist": flags.sexist,
+            "explicit": flags.explicit
+        ]
+    }
 }
 
 struct Flags: Decodable {
