@@ -96,10 +96,6 @@ extension ViewController {
                 if self.settingsParam["sexist"] == false && joke.flags.sexist {
                     return self.fetchJoke()
                 }
-                    
-                for (key, value) in joke.getFlags {
-                    print("\(key) - \(value)")
-                }
             
                 self.jokeLabel.text = "\(joke.joke ?? "")\(joke.setup ?? "") \n\n\(joke.delivery ?? "")"
                 
