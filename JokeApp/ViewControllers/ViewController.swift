@@ -11,22 +11,6 @@ final class ViewController: UIViewController {
         
     @IBOutlet var jokeLabel: UILabel!
     private let networkManager = NetworkManager.shared
-    private var settingsParam: [String : Bool] = [:]
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupSettings()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let settingsVC = segue.destination as? SettingsViewController
-        settingsVC?.nswfValue = settingsParam["nsfw"]
-        settingsVC?.religiousValue = settingsParam["religious"]
-        settingsVC?.politicalValue = settingsParam["political"]
-        settingsVC?.racistValue = settingsParam["racist"]
-        settingsVC?.sexistValue = settingsParam["sexist"]
-        settingsVC?.explicitValue = settingsParam["explicit"]
-    }
     
     @IBAction func getJoke() {
         fetchJoke()
