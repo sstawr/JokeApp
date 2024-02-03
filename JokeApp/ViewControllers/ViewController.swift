@@ -32,10 +32,6 @@ final class ViewController: UIViewController {
     
     @IBAction func getJoke() {
         fetchJoke()
-        
-        for (key, value) in settingsParam {
-            print("settings - \(key) - \(value)")
-        }
     }
     
     @IBAction func unwind(for segue: UIStoryboardSegue) {
@@ -49,19 +45,23 @@ final class ViewController: UIViewController {
     }
 
     private func showAlert(with title: String, and message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
     }
     
     private func setupSettings() {
-        settingsParam["nsfw"] = false
-        settingsParam["religious"] = false
-        settingsParam["political"] = false
-        settingsParam["racist"] = false
-        settingsParam["sexist"] = false
-        settingsParam["explicit"] = false
+        settingsParam["nsfw"] = true
+        settingsParam["religious"] = true
+        settingsParam["political"] = true
+        settingsParam["racist"] = true
+        settingsParam["sexist"] = true
+        settingsParam["explicit"] = true
     }
 }
 
@@ -73,11 +73,36 @@ extension ViewController {
             switch result {
             case .success(let joke):
                 
-//                for (key, value) in joke.getFlags {
-//                    print("\(key) - \(value)")
-//                }
+                if self.settingsParam["nsfw"] == false && joke.flags.nsfw {
+                    return self.fetchJoke()
+                }
                 
+                if self.settingsParam["explicit"] == false && joke.flags.explicit {
+                    return self.fetchJoke()
+                }
+                
+                if self.settingsParam["political"] == false && joke.flags.political {
+                    return self.fetchJoke()
+                }
+                
+                if self.settingsParam["racist"] == false && joke.flags.racist {
+                    return self.fetchJoke()
+                }
+                
+                if self.settingsParam["religious"] == false && joke.flags.religious {
+                    return self.fetchJoke()
+                }
+                
+                if self.settingsParam["sexist"] == false && joke.flags.sexist {
+                    return self.fetchJoke()
+                }
+                    
+                for (key, value) in joke.getFlags {
+                    print("\(key) - \(value)")
+                }
+            
                 self.jokeLabel.text = "\(joke.joke ?? "")\(joke.setup ?? "") \n\n\(joke.delivery ?? "")"
+                
             case .failure(let error):
                 print(error)
                 self.showAlert(with: "Failed", and: "You can see error in the Debug area")

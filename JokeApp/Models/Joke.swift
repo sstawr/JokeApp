@@ -16,7 +16,7 @@ struct Joke: Decodable {
     let lang: String
     
     var getFlags: [String: Bool] {
-        [
+        return [
             "nsfw": flags.nsfw,
             "religious": flags.religious,
             "political": flags.political,
