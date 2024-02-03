@@ -12,7 +12,6 @@ final class ViewController: UIViewController {
     @IBOutlet var jokeLabel: UILabel!
     
     private let networkManager = NetworkManager.shared
-    private let jokeFlags: [String : Bool] = [:]
     private var settingsParam: [String : Bool] = [:]
 
     override func viewDidLoad() {
