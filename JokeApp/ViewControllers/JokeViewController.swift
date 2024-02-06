@@ -75,16 +75,7 @@ extension JokeViewController {
                 }
                 
                 self.jokeLabel.text = "\(joke.joke ?? "")\(joke.setup ?? "") \n\n\(joke.delivery ?? "")"
-                
-                print("""
-                    nsfw = \(joke.flags.nsfw)
-                    explicit = \(joke.flags.explicit)
-                    political = \(joke.flags.political)
-                    racist = \(joke.flags.racist)
-                    religious = \(joke.flags.religious)
-                    sexist = \(joke.flags.sexist)
-                """)
-                
+                                
             case .failure(let error):
                 print(error)
                 self.showAlert(with: "Failed", and: "You can see error in the Debug area")
