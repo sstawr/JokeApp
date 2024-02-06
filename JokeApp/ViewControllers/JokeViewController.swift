@@ -7,15 +7,6 @@
 
 import UIKit
 
-//enum JokeFlag: CaseIterable {
-//    case nsfw
-//    case explicit
-//    case political
-//    case racist
-//    case religious
-//    case sexist
-//}
-
 final class JokeViewController: UIViewController {
         
     @IBOutlet var jokeLabel: UILabel!
@@ -48,28 +39,6 @@ final class JokeViewController: UIViewController {
         present(alert, animated: true)
     }
 }
-
-//extension JokeViewController {
-//    private func shouldFetchJoke(for settings: Settings, joke: Joke) -> Bool {
-//        let flagsToCheck = JokeFlag.allCases
-//
-//        for flag in flagsToCheck {
-//            switch flag {
-//            case .nsfw where !settings.nsfw && joke.flags.nsfw,
-//                 .explicit where !settings.explicit && joke.flags.explicit,
-//                 .political where !settings.political && joke.flags.political,
-//                 .racist where !settings.racist && joke.flags.racist,
-//                 .religious where !settings.religious && joke.flags.religious,
-//                 .sexist where !settings.sexist && joke.flags.sexist:
-//                return true
-//            default:
-//                return false
-//            }
-//        }
-//        
-//        return false
-//    }
-//}
 
 // MARK: - Networking
 extension JokeViewController {
@@ -104,10 +73,6 @@ extension JokeViewController {
                 if !settings.sexist && joke.flags.sexist {
                     return self.fetchJoke()
                 }
-                
-//                if !shouldFetchJoke(for: settings, joke: joke) {
-//                    self.jokeLabel.text = "\(joke.joke ?? "")\(joke.setup ?? "") \n\n\(joke.delivery ?? "")"
-//                }
                 
                 self.jokeLabel.text = "\(joke.joke ?? "")\(joke.setup ?? "") \n\n\(joke.delivery ?? "")"
                 
