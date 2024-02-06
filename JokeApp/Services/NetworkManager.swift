@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum NetworkError: Error {
     case invalidURL
@@ -18,21 +19,17 @@ final class NetworkManager {
     
     private init() {}
     
-    func fetchJoke(from url: URL, completion: @escaping(Result<Joke, NetworkError>) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data else {
-                print(error?.localizedDescription ?? "No error description")
-                return
-            }
-            
-            do {
-                let dataModel = try JSONDecoder().decode(Joke.self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(dataModel))
+    func fetchJoke(from url: URL, completion: @escaping(Result<Joke, AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let joke = Joke.getJoke(from: value)
+                    completion(.success(joke))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-            } catch {
-                completion(.failure(.decodingError))
-            }
-        }.resume()
+        }
     }
 }
