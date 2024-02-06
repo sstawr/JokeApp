@@ -41,7 +41,7 @@ struct Joke: Decodable {
         setup = jokeDetails["setup"] as? String
         delivery = jokeDetails["delivery"] as? String
         joke = jokeDetails["joke"] as? String
-        flags = Flags(jokeDetailsFlags: jokeDetails)
+        flags = Flags(jokeDetailsFlags: jokeDetails["flags"] as? [String: Any] ?? [:])
         safe = jokeDetails["safe"] as? Bool ?? false
         lang = jokeDetails["lang"] as? String ?? ""
     }
