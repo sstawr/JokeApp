@@ -74,6 +74,8 @@ extension JokeViewController {
                 let settings = Settings.currentSettings
                 let flagsToCheck = JokeFlags.allCases
                 
+                print(joke)
+                
                 for flag in flagsToCheck {
                     if flag.shouldFetchJoke(for: settings, flags: joke.flags) {
                         return self.fetchJoke()
@@ -103,7 +105,7 @@ extension JokeViewController {
 //                if !settings.sexist && joke.flags.sexist {
 //                    return self.fetchJoke()
 //                }
-//                
+//
                 self.jokeLabel.text = "\(joke.joke ?? "")\(joke.setup ?? "") \n\n\(joke.delivery ?? "")"
                 
                 print("""
