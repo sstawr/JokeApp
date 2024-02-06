@@ -44,7 +44,7 @@ final class JokeViewController: UIViewController {
 extension JokeViewController {
     private func fetchJoke() {
         let url = URL(string: "https://v2.jokeapi.dev/joke/Any")!
-        networkManager.fetchJoke(from: url) { result in
+        networkManager.fetchJoke(from: url) { [unowned self] result in
             switch result {
             case .success(let joke):
                 
