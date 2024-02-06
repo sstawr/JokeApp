@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class JokeViewController: UIViewController {
         
     @IBOutlet var jokeLabel: UILabel!
     private let networkManager = NetworkManager.shared
@@ -41,7 +41,7 @@ final class ViewController: UIViewController {
 }
 
 // MARK: - Networking
-extension ViewController {
+extension JokeViewController {
     private func fetchJoke() {
         let url = URL(string: "https://v2.jokeapi.dev/joke/Any")!
         networkManager.fetchJoke(from: url) { result in
