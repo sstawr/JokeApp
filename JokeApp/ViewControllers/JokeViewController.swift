@@ -29,7 +29,6 @@ extension JokeFlags {
     }
 }
 
-
 final class JokeViewController: UIViewController {
         
     @IBOutlet var jokeLabel: UILabel!
@@ -74,50 +73,12 @@ extension JokeViewController {
                 let settings = Settings.currentSettings
                 let flagsToCheck = JokeFlags.allCases
                 
-                print(joke)
-                
                 for flag in flagsToCheck {
                     if flag.shouldFetchJoke(for: settings, flags: joke.flags) {
                         return self.fetchJoke()
                     }
                 }
-                
-//                if !settings.nsfw && joke.flags.nsfw {
-//                    return self.fetchJoke()
-//                }
-//                
-//                if !settings.explicit && joke.flags.explicit {
-//                    return self.fetchJoke()
-//                }
-//                
-//                if !settings.political && joke.flags.political {
-//                    return self.fetchJoke()
-//                }
-//                
-//                if !settings.racist && joke.flags.racist {
-//                    return self.fetchJoke()
-//                }
-//                
-//                if !settings.religious && joke.flags.religious {
-//                    return self.fetchJoke()
-//                }
-//                
-//                if !settings.sexist && joke.flags.sexist {
-//                    return self.fetchJoke()
-//                }
-//
                 self.jokeLabel.text = "\(joke.joke ?? "")\(joke.setup ?? "") \n\n\(joke.delivery ?? "")"
-                
-                print("""
-                
-                    nsfw = \(joke.flags.nsfw)
-                    explicit = \(joke.flags.explicit)
-                    political = \(joke.flags.political)
-                    racist = \(joke.flags.racist)
-                    religious = \(joke.flags.religious)
-                    sexist = \(joke.flags.sexist)
-                
-                """)
                 
             case .failure(let error):
                 print(error)
